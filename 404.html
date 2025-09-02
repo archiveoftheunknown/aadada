@@ -43,8 +43,73 @@
             scroll-behavior: smooth;
         }
         
+        /* Loading overlay styles */
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        #mainContent {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        #mainContent.show {
+            opacity: 1;
+        }
+        
+        /* Spinner animation */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #e5e7eb;
+            border-top-color: #991b1b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Progress bar animation */
+        .progress-bar {
+            width: 200px;
+            height: 3px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: #991b1b;
+            animation: progress 2s ease-out forwards;
+        }
+        
+        @keyframes progress {
+            0% { width: 0%; }
+            30% { width: 35%; }
+            60% { width: 75%; }
+            100% { width: 100%; }
+        }
+        
         /* Print styles for accessibility */
         @media print {
+            #loadingOverlay {
+                display: none !important;
+            }
             .bg-gray-100 {
                 background: white !important;
             }
@@ -57,7 +122,17 @@
 </head>
 <body class="bg-white min-h-screen">
 
-    <div class="w-full max-w-none mx-auto border-t-8 border-red-800 p-8 md:p-12 text-center text-gray-800 min-h-screen flex flex-col justify-center">
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay">
+        <div class="spinner"></div>
+        <p class="text-gray-700 mt-6 text-sm font-medium">Memverifikasi status situs...</p>
+        <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+        </div>
+        <p class="text-gray-500 mt-4 text-xs">Sistem sedang memeriksa konten</p>
+    </div>
+
+    <div id="mainContent" class="w-full max-w-none mx-auto border-t-8 border-red-800 p-8 md:p-12 text-center text-gray-800 min-h-screen flex flex-col justify-center">
         
         <!-- Header -->
         <header class="mb-8">
@@ -135,6 +210,29 @@
             </p>
         </footer>
     </div>
+
+    <script>
+        // Simulate loading and processing
+        window.addEventListener('DOMContentLoaded', function() {
+            // Get elements
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const mainContent = document.getElementById('mainContent');
+            
+            // Add random delay between 1.5 to 2.5 seconds for realism
+            const delay = Math.random() * 1000 + 1500;
+            
+            setTimeout(function() {
+                // Fade out loading overlay
+                loadingOverlay.style.opacity = '0';
+                
+                // After fade animation completes, hide overlay and show content
+                setTimeout(function() {
+                    loadingOverlay.style.display = 'none';
+                    mainContent.classList.add('show');
+                }, 500);
+            }, delay);
+        });
+    </script>
 
 </body>
 </html>
