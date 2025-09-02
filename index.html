@@ -60,12 +60,20 @@
         }
         
         #mainContent {
+            display: none;
             opacity: 0;
             transition: opacity 0.5s ease;
         }
         
         #mainContent.show {
+            display: block;
             opacity: 1;
+        }
+        
+        /* Prevent scrolling during loading */
+        body.loading {
+            overflow: hidden;
+            height: 100vh;
         }
         
         /* Spinner animation */
@@ -120,7 +128,7 @@
         }
     </style>
 </head>
-<body class="bg-white min-h-screen">
+<body class="bg-white min-h-screen loading">
 
     <!-- Loading Overlay -->
     <div id="loadingOverlay">
@@ -264,7 +272,12 @@
                 // After fade animation completes, hide overlay and show content
                 setTimeout(function() {
                     loadingOverlay.style.display = 'none';
-                    mainContent.classList.add('show');
+                    mainContent.style.display = 'block';
+                    // Small delay to ensure display is set before opacity transition
+                    setTimeout(function() {
+                        mainContent.classList.add('show');
+                        document.body.classList.remove('loading');
+                    }, 50);
                 }, 500);
             }, delay);
         });
