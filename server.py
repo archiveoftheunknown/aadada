@@ -69,7 +69,7 @@ class AlwaysBlockedHandler(http.server.SimpleHTTPRequestHandler):
         // Redirect after a brief moment to show the redirect is happening
         setTimeout(function() {
             window.location.href = '/';
-        }, 800);
+        }, 2000);
     </script>
 </head>
 <body>
