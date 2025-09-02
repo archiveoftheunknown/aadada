@@ -56,7 +56,23 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.5s ease;
+            opacity: 0;
+            animation: fadeInLoad 0.3s ease 0.2s forwards;
+        }
+        
+        @keyframes fadeInLoad {
+            0% { 
+                opacity: 0;
+                background: #ffffff;
+            }
+            50% {
+                opacity: 1;
+                background: #f9f9f9;
+            }
+            100% { 
+                opacity: 1;
+                background: #ffffff;
+            }
         }
         
         #mainContent {
@@ -76,14 +92,38 @@
             height: 100vh;
         }
         
-        /* Spinner animation */
+        /* Initial white flash */
+        .flash-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 10000;
+            pointer-events: none;
+            animation: flashEffect 0.4s ease-out;
+        }
+        
+        @keyframes flashEffect {
+            0% { opacity: 0; }
+            20% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        /* Spinner animation with delayed start */
         .spinner {
             width: 50px;
             height: 50px;
             border: 3px solid #e5e7eb;
             border-top-color: #991b1b;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            opacity: 0;
+            animation: fadeInSpin 0.3s ease 0.5s forwards, spin 1s linear 0.5s infinite;
+        }
+        
+        @keyframes fadeInSpin {
+            to { opacity: 1; }
         }
         
         @keyframes spin {
@@ -91,6 +131,15 @@
         }
         
         /* Progress bar animation */
+        .loading-text {
+            opacity: 0;
+            animation: fadeInText 0.4s ease 0.6s forwards;
+        }
+        
+        @keyframes fadeInText {
+            to { opacity: 1; }
+        }
+        
         .progress-bar {
             width: 200px;
             height: 3px;
@@ -98,18 +147,24 @@
             border-radius: 3px;
             overflow: hidden;
             margin-top: 20px;
+            opacity: 0;
+            animation: fadeInText 0.4s ease 0.7s forwards;
         }
         
         .progress-bar-fill {
             height: 100%;
             background: #991b1b;
-            animation: progress 2s ease-out forwards;
+            animation: progress 2.5s ease-out 0.8s forwards;
         }
         
         @keyframes progress {
             0% { width: 0%; }
+            15% { width: 12%; }
             30% { width: 35%; }
+            45% { width: 48%; }
             60% { width: 75%; }
+            80% { width: 85%; }
+            95% { width: 95%; }
             100% { width: 100%; }
         }
         
@@ -130,14 +185,17 @@
 </head>
 <body class="bg-white min-h-screen loading">
 
+    <!-- White Flash Effect -->
+    <div class="flash-overlay"></div>
+    
     <!-- Loading Overlay -->
     <div id="loadingOverlay">
         <div class="spinner"></div>
-        <p class="text-gray-700 mt-6 text-sm font-medium">Memverifikasi status situs...</p>
+        <p class="text-gray-700 mt-6 text-sm font-medium loading-text">Memverifikasi status situs...</p>
         <div class="progress-bar">
             <div class="progress-bar-fill"></div>
         </div>
-        <p class="text-gray-500 mt-4 text-xs">Sistem sedang memeriksa konten</p>
+        <p class="text-gray-500 mt-4 text-xs loading-text">Sistem sedang memeriksa konten</p>
     </div>
 
     <div id="mainContent" class="w-full max-w-none mx-auto border-t-8 border-red-800 p-8 md:p-12 text-center text-gray-800 min-h-screen flex flex-col justify-center">
@@ -229,24 +287,27 @@
             const statusText = loadingOverlay.querySelector('p.text-gray-500');
             
             // Simulate different network conditions and server response times
-            // 30% chance of fast load (0.8-1.5s), 50% normal (1.5-3s), 20% slow (3-5s)
+            // Adding initial redirect delay
             const networkRandom = Math.random();
             let delay;
             
-            if (networkRandom < 0.3) {
+            if (networkRandom < 0.25) {
                 // Fast connection
-                delay = Math.random() * 700 + 800;
-            } else if (networkRandom < 0.8) {
+                delay = Math.random() * 800 + 1200;
+            } else if (networkRandom < 0.75) {
                 // Normal connection
-                delay = Math.random() * 1500 + 1500;
+                delay = Math.random() * 1500 + 2000;
             } else {
                 // Slow connection or heavy server load
-                delay = Math.random() * 2000 + 3000;
+                delay = Math.random() * 2000 + 3500;
             }
             
             // Add small random processing variations for each page load
             const processingVariation = Math.random() * 500 - 250;
             delay += processingVariation;
+            
+            // Add 800ms base delay for the initial animations to complete
+            delay += 800;
             
             // Change loading messages during the process
             const messages = [
@@ -266,19 +327,24 @@
             
             setTimeout(function() {
                 clearInterval(messageInterval);
-                // Fade out loading overlay
-                loadingOverlay.style.opacity = '0';
+                // Start fade out with slight flicker
+                loadingOverlay.style.transition = 'opacity 0.3s ease';
+                loadingOverlay.style.opacity = '0.95';
                 
-                // After fade animation completes, hide overlay and show content
                 setTimeout(function() {
-                    loadingOverlay.style.display = 'none';
-                    mainContent.style.display = 'block';
-                    // Small delay to ensure display is set before opacity transition
+                    loadingOverlay.style.opacity = '0';
+                    
+                    // After fade animation completes, hide overlay and show content
                     setTimeout(function() {
-                        mainContent.classList.add('show');
-                        document.body.classList.remove('loading');
-                    }, 50);
-                }, 500);
+                        loadingOverlay.style.display = 'none';
+                        mainContent.style.display = 'block';
+                        // Small delay to ensure display is set before opacity transition
+                        setTimeout(function() {
+                            mainContent.classList.add('show');
+                            document.body.classList.remove('loading');
+                        }, 50);
+                    }, 300);
+                }, 100);
             }, delay);
         });
     </script>
