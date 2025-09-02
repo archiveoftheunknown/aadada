@@ -48,3 +48,16 @@ The application uses a purely static approach with no backend components:
 - All modern browsers with CSS3 and HTML5 support
 - Mobile browsers with responsive viewport support
 - Print media support for document generation
+
+# Platform-Specific Behavior
+
+## GitHub Pages
+- **404.html**: Custom redirect page that shows when accessing non-existent paths
+- Redirects all random URLs to the main page using JavaScript
+- Shows "Mengarahkan ke halaman utama..." with spinner before redirecting
+- Works within GitHub Pages static hosting limitations
+
+## Local Development (Replit)
+- **server.py**: Python server that handles redirects server-side
+- Provides more robust redirect handling for development
+- All paths redirect to main page with proper HTTP 301 redirects
