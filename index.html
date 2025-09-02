@@ -212,16 +212,52 @@
     </div>
 
     <script>
-        // Simulate loading and processing
+        // Simulate loading and processing with realistic variations
         window.addEventListener('DOMContentLoaded', function() {
             // Get elements
             const loadingOverlay = document.getElementById('loadingOverlay');
             const mainContent = document.getElementById('mainContent');
+            const loadingText = loadingOverlay.querySelector('p.text-gray-700');
+            const statusText = loadingOverlay.querySelector('p.text-gray-500');
             
-            // Add random delay between 1.5 to 2.5 seconds for realism
-            const delay = Math.random() * 1000 + 1500;
+            // Simulate different network conditions and server response times
+            // 30% chance of fast load (0.8-1.5s), 50% normal (1.5-3s), 20% slow (3-5s)
+            const networkRandom = Math.random();
+            let delay;
+            
+            if (networkRandom < 0.3) {
+                // Fast connection
+                delay = Math.random() * 700 + 800;
+            } else if (networkRandom < 0.8) {
+                // Normal connection
+                delay = Math.random() * 1500 + 1500;
+            } else {
+                // Slow connection or heavy server load
+                delay = Math.random() * 2000 + 3000;
+            }
+            
+            // Add small random processing variations for each page load
+            const processingVariation = Math.random() * 500 - 250;
+            delay += processingVariation;
+            
+            // Change loading messages during the process
+            const messages = [
+                { main: 'Memverifikasi status situs...', sub: 'Sistem sedang memeriksa konten' },
+                { main: 'Menganalisis konten...', sub: 'Memvalidasi terhadap peraturan' },
+                { main: 'Memproses pemblokiran...', sub: 'Menerapkan pembatasan akses' }
+            ];
+            
+            let messageIndex = 0;
+            const messageInterval = setInterval(function() {
+                if (messageIndex < messages.length - 1) {
+                    messageIndex++;
+                    loadingText.textContent = messages[messageIndex].main;
+                    statusText.textContent = messages[messageIndex].sub;
+                }
+            }, delay / 3);
             
             setTimeout(function() {
+                clearInterval(messageInterval);
                 // Fade out loading overlay
                 loadingOverlay.style.opacity = '0';
                 
