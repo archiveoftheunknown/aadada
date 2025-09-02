@@ -5,13 +5,31 @@ import os
 
 class AlwaysBlockedHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
-        # Always serve the index.html file regardless of the requested path
-        # This makes it appear that the entire domain is blocked
+        # If accessing any path other than root, redirect to root
+        if self.path != '/' and self.path != '/index.html':
+            self.send_response(301)
+            self.send_header('Location', '/')
+            self.send_header('X-Frame-Options', 'DENY')
+            self.send_header('X-Content-Type-Options', 'nosniff')
+            self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            self.end_headers()
+            return
+        
+        # For root path, serve the index.html
         self.path = '/index.html'
         return super().do_GET()
     
     def do_HEAD(self):
         # Handle HEAD requests the same way
+        if self.path != '/' and self.path != '/index.html':
+            self.send_response(301)
+            self.send_header('Location', '/')
+            self.send_header('X-Frame-Options', 'DENY')
+            self.send_header('X-Content-Type-Options', 'nosniff')
+            self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            self.end_headers()
+            return
+        
         self.path = '/index.html'
         return super().do_HEAD()
     
