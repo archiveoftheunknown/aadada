@@ -76,7 +76,7 @@ class AlwaysBlockedHandler(http.server.SimpleHTTPRequestHandler):
     <div class="redirect-box">
         <div class="spinner"></div>
         <p>Mengarahkan ke halaman utama...</p>
-        <p class="url-text">trustpositif.komdigi.go.id</p>
+        <p class="url-text">layanan.komdigi.go.id</p>
     </div>
 </body>
 </html>'''
