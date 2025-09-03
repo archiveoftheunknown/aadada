@@ -337,10 +337,10 @@
                                 <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
                                 </svg>
-                                <span class="lang-content" id="phone-id" style="display: none;">
+                                <span id="phone-id" style="display: none;">
                                     (021) 3504024
                                 </span>
-                                <span class="lang-content" id="phone-en" style="display: none;">
+                                <span id="phone-en" style="display: none;">
                                     +62 21 3504024
                                 </span>
                             </div>
@@ -414,12 +414,12 @@
             if (currentLang === 'id') {
                 idContent.classList.add('active');
                 enContent.classList.remove('active');
-                addressId.style.display = 'inline';
-                addressEn.style.display = 'none';
-                phoneId.style.display = 'inline';
-                phoneEn.style.display = 'none';
-                copyrightId.style.display = 'inline';
-                copyrightEn.style.display = 'none';
+                if (addressId) addressId.style.display = 'inline';
+                if (addressEn) addressEn.style.display = 'none';
+                if (phoneId) phoneId.style.display = 'inline';
+                if (phoneEn) phoneEn.style.display = 'none';
+                if (copyrightId) copyrightId.style.display = 'inline';
+                if (copyrightEn) copyrightEn.style.display = 'none';
                 langToggle.textContent = '🌐 English';
                 document.documentElement.lang = 'id';
                 if (loadingText && statusText) {
@@ -429,12 +429,12 @@
             } else {
                 idContent.classList.remove('active');
                 enContent.classList.add('active');
-                addressId.style.display = 'none';
-                addressEn.style.display = 'inline';
-                phoneId.style.display = 'none';
-                phoneEn.style.display = 'inline';
-                copyrightId.style.display = 'none';
-                copyrightEn.style.display = 'inline';
+                if (addressId) addressId.style.display = 'none';
+                if (addressEn) addressEn.style.display = 'inline';
+                if (phoneId) phoneId.style.display = 'none';
+                if (phoneEn) phoneEn.style.display = 'inline';
+                if (copyrightId) copyrightId.style.display = 'none';
+                if (copyrightEn) copyrightEn.style.display = 'inline';
                 langToggle.textContent = '🌐 Indonesia';
                 document.documentElement.lang = 'en';
                 if (loadingText && statusText) {
