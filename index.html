@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Situs web ditangguhkan oleh Kementerian Komunikasi dan Digital Republik Indonesia berdasarkan peraturan perundang-undangan yang berlaku.">
-    <meta name="keywords" content="situs ditangguhkan, Kementerian Komunikasi dan Digital, Indonesia, pemblokiran">
-    <meta name="author" content="Kementerian Komunikasi dan Digital Republik Indonesia">
+    <meta name="description" content="Website suspended by the Ministry of Communication and Digital Affairs of the Republic of Indonesia">
+    <meta name="keywords" content="site suspended, Ministry of Communication and Digital, Indonesia, blocking">
+    <meta name="author" content="Ministry of Communication and Digital Affairs of the Republic of Indonesia">
     <meta name="robots" content="noindex, nofollow">
     
-    <!-- Open Graph Meta Tags for Social Sharing -->
-    <meta property="og:title" content="SITUS DITANGGUHKAN - Kementerian Komunikasi dan Digital RI">
-    <meta property="og:description" content="Akses ke situs web ini telah ditangguhkan berdasarkan peraturan perundang-undangan Republik Indonesia.">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="SITE SUSPENDED - Ministry of Communication and Digital Affairs">
+    <meta property="og:description" content="Access to this website has been suspended under Indonesian laws and regulations.">
     <meta property="og:type" content="website">
-    <meta property="og:locale" content="id_ID">
+    <meta property="og:locale" content="en_US">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="SITUS DITANGGUHKAN - Kementerian Komunikasi dan Digital RI">
-    <meta name="twitter:description" content="Akses ke situs web ini telah ditangguhkan berdasarkan peraturan perundang-undangan Republik Indonesia.">
+    <meta name="twitter:title" content="SITE SUSPENDED">
+    <meta name="twitter:description" content="Access suspended under Indonesian regulations">
     
-    <title>SITUS DITANGGUHKAN</title>
+    <title>SITE SUSPENDED / SITUS DITANGGUHKAN</title>
     
     <!-- External CSS Dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -50,6 +50,36 @@
         /* Hide main content initially */
         .main-content {
             display: none;
+        }
+        
+        /* Language toggle button */
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        
+        .lang-toggle:hover {
+            background: #f9fafb;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        
+        /* Hide content based on language */
+        .lang-content {
+            display: none;
+        }
+        
+        .lang-content.active {
+            display: block;
         }
         
         /* Spinner */
@@ -107,101 +137,223 @@
 </head>
 <body class="bg-white min-h-screen">
 
+    <!-- Language Toggle Button -->
+    <button class="lang-toggle" onclick="toggleLanguage()" id="langToggle">
+        🌐 English
+    </button>
+
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="spinner"></div>
-        <p class="text-gray-800 mt-6 text-base font-semibold" id="loadingText">Memverifikasi status situs...</p>
+        <p class="text-gray-800 mt-6 text-base font-semibold" id="loadingText">Verifying site status...</p>
         <div class="progress-bar">
             <div class="progress-fill"></div>
         </div>
-        <p class="text-gray-600 mt-4 text-sm" id="statusText">Sistem sedang memeriksa konten</p>
+        <p class="text-gray-600 mt-4 text-sm" id="statusText">System checking content</p>
     </div>
 
     <!-- Main Content -->
     <div class="main-content fade-in" id="mainContent">
         <div class="w-full max-w-none mx-auto border-t-8 border-red-800 p-8 md:p-12 text-center text-gray-800 min-h-screen flex flex-col justify-center">
             
-            <!-- Header -->
-            <header class="mb-8">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Logo_Kementerian_Komunikasi_dan_Digital_Republik_Indonesia_%282024_full_version%29.svg/1199px-Logo_Kementerian_Komunikasi_dan_Digital_Republik_Indonesia_%282024_full_version%29.svg.png" 
-                     alt="Lambang Kementerian Komunikasi dan Digital" 
-                     class="w-28 h-auto mx-auto mb-6"
-                     loading="eager">
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">AKSES DITANGGUHKAN</h1>
-                <p class="text-sm md:text-base text-gray-500 mt-2">Berdasarkan Peraturan Perundang-undangan Republik Indonesia</p>
-            </header>
+            <!-- Indonesian Content -->
+            <div class="lang-content" id="content-id">
+                <!-- Header -->
+                <header class="mb-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Logo_Kementerian_Komunikasi_dan_Digital_Republik_Indonesia_%282024_full_version%29.svg/1199px-Logo_Kementerian_Komunikasi_dan_Digital_Republik_Indonesia_%282024_full_version%29.svg.png" 
+                         alt="Lambang Kementerian Komunikasi dan Digital" 
+                         class="w-28 h-auto mx-auto mb-6"
+                         loading="eager">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">AKSES DITANGGUHKAN</h1>
+                    <p class="text-sm md:text-base text-gray-500 mt-2">Berdasarkan Peraturan Perundang-undangan Republik Indonesia</p>
+                </header>
 
-            <!-- Main Content -->
-            <main>
-                <div class="border-y border-gray-200 py-6">
-                    <p class="text-base md:text-lg leading-relaxed">
-                        Situs web yang Anda coba akses telah ditangguhkan oleh <strong>Kementerian Komunikasi dan Digital Republik Indonesia</strong> karena terindikasi mengandung salah satu atau lebih muatan negatif berikut:
-                    </p>
+                <!-- Main Content -->
+                <main>
+                    <div class="border-y border-gray-200 py-6">
+                        <p class="text-base md:text-lg leading-relaxed">
+                            Situs web yang Anda coba akses telah ditangguhkan oleh <strong>Kementerian Komunikasi dan Digital Republik Indonesia</strong> karena terindikasi mengandung salah satu atau lebih muatan negatif berikut:
+                        </p>
 
-                    <div class="mt-6 text-left max-w-md mx-auto space-y-3">
-                        <div class="flex items-start">
-                            <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
-                            </svg>
-                            <span>Pornografi & Aktivitas Seksual Eksplisit</span>
-                        </div>
-                        <div class="flex items-start">
-                            <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
-                            </svg>
-                            <span>Perjudian Daring (Online Gambling)</span>
-                        </div>
-                        <div class="flex items-start">
-                            <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
-                            </svg>
-                            <span>Penipuan, Phishing, & Malware</span>
-                        </div>
-                         <div class="flex items-start">
-                            <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
-                            </svg>
-                            <span>Ujaran Kebencian (Hate Speech), SARA, & Radikalisme</span>
-                        </div>
-                         <div class="flex items-start">
-                            <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
-                            </svg>
-                            <span>Pelanggaran Hak Kekayaan Intelektual (HKI)</span>
+                        <div class="mt-6 text-left max-w-md mx-auto space-y-3">
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                </svg>
+                                <span>Pornografi & Aktivitas Seksual Eksplisit</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                </svg>
+                                <span>Perjudian Daring (Online Gambling)</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                </svg>
+                                <span>Penipuan, Phishing, & Malware</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                </svg>
+                                <span>Ujaran Kebencian (Hate Speech), SARA, & Radikalisme</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                </svg>
+                                <span>Pelanggaran Hak Kekayaan Intelektual (HKI)</span>
+                            </div>
                         </div>
                     </div>
+                    
+                    <p class="mt-6 text-xs md:text-sm text-gray-500">
+                        Tindakan pemblokiran ini dilakukan sebagai upaya menjaga ruang digital Indonesia yang bersih, sehat, dan produktif sesuai dengan amanat Undang-Undang No. 19 Tahun 2016 tentang Perubahan atas Undang-Undang No. 11 Tahun 2008 tentang Informasi dan Transaksi Elektronik (UU ITE).
+                    </p>
+                </main>
 
-                </div>
-                
-                <p class="mt-6 text-xs md:text-sm text-gray-500">
-                    Tindakan pemblokiran ini dilakukan sebagai upaya menjaga ruang digital Indonesia yang bersih, sehat, dan produktif sesuai dengan amanat Undang-Undang No. 19 Tahun 2016 tentang Perubahan atas Undang-Undang No. 11 Tahun 2008 tentang Informasi dan Transaksi Elektronik (UU ITE).
-                </p>
-            </main>
+                <!-- Info for Site Owner -->
+                <section class="mt-8 bg-gray-50 rounded-lg p-6 text-left border border-gray-200">
+                    <h2 class="font-bold text-gray-800 mb-3 text-base">Informasi bagi Pemilik Situs Web</h2>
+                    <p class="text-xs md:text-sm text-gray-600">
+                        Jika Anda adalah pemilik situs web ini dan merasa bahwa telah terjadi kesalahan dalam penangguhan, Anda dapat mengajukan permohonan normalisasi melalui surat elektronik ke alamat <a href="mailto:pelayanan@mail.komdigi.go.id" class="text-blue-600 hover:underline font-medium">pelayanan@mail.komdigi.go.id</a> dengan menyertakan bukti kepemilikan dan justifikasi yang relevan untuk proses peninjauan lebih lanjut.
+                    </p>
+                </section>
+            </div>
 
-            <!-- Info for Site Owner -->
-            <section class="mt-8 bg-gray-50 rounded-lg p-6 text-left border border-gray-200">
-                <h2 class="font-bold text-gray-800 mb-3 text-base">Informasi bagi Pemilik Situs Web</h2>
-                <p class="text-xs md:text-sm text-gray-600">
-                    Jika Anda adalah pemilik situs web ini dan merasa bahwa telah terjadi kesalahan dalam penangguhan, Anda dapat mengajukan permohonan normalisasi melalui surat elektronik ke alamat <a href="mailto:pelayanan@mail.komdigi.go.id" class="text-blue-600 hover:underline font-medium" rel="noopener noreferrer">pelayanan@mail.komdigi.go.id</a> dengan menyertakan bukti kepemilikan dan justifikasi yang relevan untuk proses peninjauan lebih lanjut.
-                </p>
-            </section>
+            <!-- English Content -->
+            <div class="lang-content" id="content-en">
+                <!-- Header -->
+                <header class="mb-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Logo_Kementerian_Komunikasi_dan_Digital_Republik_Indonesia_%282024_full_version%29.svg/1199px-Logo_Kementerian_Komunikasi_dan_Digital_Republik_Indonesia_%282024_full_version%29.svg.png" 
+                         alt="Ministry of Communication and Digital Affairs Logo" 
+                         class="w-28 h-auto mx-auto mb-6"
+                         loading="eager">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">ACCESS SUSPENDED</h1>
+                    <p class="text-sm md:text-base text-gray-500 mt-2">Under the Laws and Regulations of the Republic of Indonesia</p>
+                </header>
+
+                <!-- Main Content -->
+                <main>
+                    <div class="border-y border-gray-200 py-6">
+                        <p class="text-base md:text-lg leading-relaxed">
+                            The website you are trying to access has been suspended by the <strong>Ministry of Communication and Digital Affairs of the Republic of Indonesia</strong> due to indications of containing one or more of the following prohibited content:
+                        </p>
+
+                        <div class="mt-6 text-left max-w-md mx-auto space-y-3">
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                </svg>
+                                <span>Pornography & Explicit Sexual Content</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                </svg>
+                                <span>Online Gambling</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                </svg>
+                                <span>Fraud, Phishing, & Malware</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                </svg>
+                                <span>Hate Speech, Discrimination, & Extremism</span>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 text-red-700 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                </svg>
+                                <span>Intellectual Property Rights Violations</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="mt-6 text-xs md:text-sm text-gray-500">
+                        This blocking action is carried out as an effort to maintain a clean, healthy, and productive Indonesian digital space in accordance with Law No. 19 of 2016 concerning Amendments to Law No. 11 of 2008 concerning Electronic Information and Transactions (ITE Law).
+                    </p>
+                </main>
+
+                <!-- Info for Site Owner -->
+                <section class="mt-8 bg-gray-50 rounded-lg p-6 text-left border border-gray-200">
+                    <h2 class="font-bold text-gray-800 mb-3 text-base">Information for Website Owners</h2>
+                    <p class="text-xs md:text-sm text-gray-600">
+                        If you are the owner of this website and believe that the suspension was made in error, you may submit a normalization request via email to <a href="mailto:pelayanan@mail.komdigi.go.id" class="text-blue-600 hover:underline font-medium">pelayanan@mail.komdigi.go.id</a> including proof of ownership and relevant justification for further review.
+                    </p>
+                </section>
+            </div>
 
             <!-- Footer -->
             <footer class="mt-10 border-t border-gray-200 pt-6">
                 <img src="https://layanan.komdigi.go.id/images/logo-kominfo-header.jpg" 
-                     alt="Logo Kementerian Komunikasi dan Digital" 
+                     alt="Ministry Logo" 
                      class="h-10 mx-auto"
                      loading="lazy">
                 <p class="text-xs text-gray-400 mt-4">
-                    &copy; 2025 Kementerian Komunikasi dan Digital Republik Indonesia
+                    &copy; 2025 Kementerian Komunikasi dan Digital Republik Indonesia / Ministry of Communication and Digital Affairs
                 </p>
             </footer>
         </div>
     </div>
 
     <script>
-        // Simple loading effect
+        // Detect browser language
+        function detectLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            const isIndonesian = browserLang.toLowerCase().includes('id');
+            return isIndonesian ? 'id' : 'en';
+        }
+
+        // Set initial language based on detection
+        let currentLang = detectLanguage();
+
+        // Toggle language function
+        function toggleLanguage() {
+            currentLang = currentLang === 'id' ? 'en' : 'id';
+            updateLanguage();
+        }
+
+        // Update displayed language
+        function updateLanguage() {
+            const idContent = document.getElementById('content-id');
+            const enContent = document.getElementById('content-en');
+            const langToggle = document.getElementById('langToggle');
+            const loadingText = document.getElementById('loadingText');
+            const statusText = document.getElementById('statusText');
+            
+            if (currentLang === 'id') {
+                idContent.classList.add('active');
+                enContent.classList.remove('active');
+                langToggle.textContent = '🌐 English';
+                document.documentElement.lang = 'id';
+                if (loadingText && statusText) {
+                    loadingText.textContent = 'Memverifikasi status situs...';
+                    statusText.textContent = 'Sistem sedang memeriksa konten';
+                }
+            } else {
+                idContent.classList.remove('active');
+                enContent.classList.add('active');
+                langToggle.textContent = '🌐 Indonesia';
+                document.documentElement.lang = 'en';
+                if (loadingText && statusText) {
+                    loadingText.textContent = 'Verifying site status...';
+                    statusText.textContent = 'System checking content';
+                }
+            }
+        }
+
+        // Loading effect
         window.addEventListener('load', function() {
+            // Set initial language
+            updateLanguage();
+            
             const loadingScreen = document.getElementById('loadingScreen');
             const mainContent = document.getElementById('mainContent');
             const loadingText = document.getElementById('loadingText');
@@ -210,15 +362,25 @@
             // Random delay between 2 to 3.5 seconds
             const delay = Math.random() * 1500 + 2000;
             
-            // Update messages during loading
+            // Update messages during loading based on language
             setTimeout(function() {
-                loadingText.textContent = 'Menganalisis konten...';
-                statusText.textContent = 'Memvalidasi terhadap peraturan';
+                if (currentLang === 'id') {
+                    loadingText.textContent = 'Menganalisis konten...';
+                    statusText.textContent = 'Memvalidasi terhadap peraturan';
+                } else {
+                    loadingText.textContent = 'Analyzing content...';
+                    statusText.textContent = 'Validating against regulations';
+                }
             }, delay / 3);
             
             setTimeout(function() {
-                loadingText.textContent = 'Memproses pemblokiran...';
-                statusText.textContent = 'Menerapkan pembatasan akses';
+                if (currentLang === 'id') {
+                    loadingText.textContent = 'Memproses pemblokiran...';
+                    statusText.textContent = 'Menerapkan pembatasan akses';
+                } else {
+                    loadingText.textContent = 'Processing block...';
+                    statusText.textContent = 'Applying access restrictions';
+                }
             }, (delay / 3) * 2);
             
             // Hide loading and show content

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mengarahkan...</title>
+    <title>Redirecting / Mengarahkan...</title>
     <style>
         body {
             margin: 0;
@@ -49,8 +49,24 @@
         }
     </style>
     <script>
+        // Detect browser language
+        function detectLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            return browserLang.toLowerCase().includes('id') ? 'id' : 'en';
+        }
+
         // Redirect to the root page after showing the redirect message
         window.addEventListener('DOMContentLoaded', function() {
+            // Update text based on language
+            const lang = detectLanguage();
+            const redirectText = document.getElementById('redirectText');
+            
+            if (lang === 'id') {
+                redirectText.textContent = 'Mengarahkan ke halaman utama...';
+            } else {
+                redirectText.textContent = 'Redirecting to main page...';
+            }
+            
             setTimeout(function() {
                 // Get the base URL for GitHub Pages or local environment
                 var pathParts = window.location.pathname.split('/');
@@ -78,7 +94,7 @@
 <body>
     <div class="redirect-box">
         <div class="spinner"></div>
-        <p>Mengarahkan ke halaman utama...</p>
+        <p id="redirectText">Redirecting to main page...</p>
         <p class="url-text">layanan.komdigi.go.id</p>
     </div>
 </body>
