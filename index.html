@@ -292,14 +292,18 @@
 
             <!-- Footer -->
             <footer class="mt-10 border-t border-gray-200 pt-6">
-                <div class="text-xs text-gray-500 space-y-2">
-                    <p class="font-semibold">Kementerian Komunikasi dan Digital Republik Indonesia</p>
-                    <p>Jl. Medan Merdeka Barat No.9, Jakarta Pusat 10110</p>
-                    <p>Telepon: (021) 3452841 | Email: info@mail.komdigi.go.id</p>
-                    <div class="pt-3 mt-3 border-t border-gray-100">
-                        <p class="text-gray-400">&copy; 2025 Hak Cipta Dilindungi Undang-Undang</p>
-                    </div>
-                </div>
+                <img src="https://layanan.komdigi.go.id/images/logo-kominfo-header.jpg" 
+                     alt="Ministry Logo" 
+                     class="h-10 mx-auto"
+                     loading="lazy">
+                <p class="text-xs text-gray-400 mt-4">
+                    <span class="lang-content" id="footer-id" style="display: none;">
+                        &copy; 2025 Kementerian Komunikasi dan Digital Republik Indonesia
+                    </span>
+                    <span class="lang-content" id="footer-en" style="display: none;">
+                        &copy; 2025 Ministry of Communication and Digital Affairs of the Republic of Indonesia
+                    </span>
+                </p>
             </footer>
         </div>
     </div>
@@ -325,6 +329,8 @@
         function updateLanguage() {
             const idContent = document.getElementById('content-id');
             const enContent = document.getElementById('content-en');
+            const footerId = document.getElementById('footer-id');
+            const footerEn = document.getElementById('footer-en');
             const langToggle = document.getElementById('langToggle');
             const loadingText = document.getElementById('loadingText');
             const statusText = document.getElementById('statusText');
@@ -332,6 +338,8 @@
             if (currentLang === 'id') {
                 idContent.classList.add('active');
                 enContent.classList.remove('active');
+                footerId.style.display = 'inline';
+                footerEn.style.display = 'none';
                 langToggle.textContent = '🌐 English';
                 document.documentElement.lang = 'id';
                 if (loadingText && statusText) {
@@ -341,6 +349,8 @@
             } else {
                 idContent.classList.remove('active');
                 enContent.classList.add('active');
+                footerId.style.display = 'none';
+                footerEn.style.display = 'inline';
                 langToggle.textContent = '🌐 Indonesia';
                 document.documentElement.lang = 'en';
                 if (loadingText && statusText) {
