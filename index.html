@@ -291,19 +291,72 @@
             </div>
 
             <!-- Footer -->
-            <footer class="mt-10 border-t border-gray-200 pt-6">
-                <img src="https://layanan.komdigi.go.id/images/logo-kominfo-header.jpg" 
-                     alt="Ministry Logo" 
-                     class="h-10 mx-auto"
-                     loading="lazy">
-                <p class="text-xs text-gray-400 mt-4">
-                    <span class="lang-content" id="footer-id" style="display: none;">
-                        &copy; 2025 Kementerian Komunikasi dan Digital Republik Indonesia
-                    </span>
-                    <span class="lang-content" id="footer-en" style="display: none;">
-                        &copy; 2025 Ministry of Communication and Digital Affairs of the Republic of Indonesia
-                    </span>
-                </p>
+            <footer class="mt-10">
+                <!-- Contact Info Section -->
+                <div class="bg-blue-900 text-white py-6 px-8 rounded-t-lg">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                            <!-- Address -->
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                </svg>
+                                <div>
+                                    <span class="lang-content" id="address-id" style="display: none;">
+                                        Jl. Medan Merdeka Barat No. 9,<br>Jakarta Pusat 10110
+                                    </span>
+                                    <span class="lang-content" id="address-en" style="display: none;">
+                                        Jl. Medan Merdeka Barat No. 9,<br>Central Jakarta 10110
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <!-- Phone -->
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                                </svg>
+                                <div>
+                                    <span class="lang-content" id="phone-id" style="display: none;">
+                                        (021) 3504024
+                                    </span>
+                                    <span class="lang-content" id="phone-en" style="display: none;">
+                                        +62 21 3504024
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <!-- Email -->
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                                </svg>
+                                <a href="mailto:pelayanan@mail.komdigi.go.id" class="hover:underline">
+                                    pelayanan@mail.komdigi.go.id
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Copyright Section -->
+                <div class="bg-gray-100 border-t border-gray-200 py-4 px-8">
+                    <div class="flex items-center justify-between max-w-4xl mx-auto">
+                        <img src="https://layanan.komdigi.go.id/images/logo-kominfo-header.jpg" 
+                             alt="Ministry Logo" 
+                             class="h-8"
+                             loading="lazy">
+                        <p class="text-xs text-gray-600">
+                            <span class="lang-content" id="copyright-id" style="display: none;">
+                                &copy; 2025 Kementerian Komunikasi dan Digital Republik Indonesia
+                            </span>
+                            <span class="lang-content" id="copyright-en" style="display: none;">
+                                &copy; 2025 Ministry of Communication and Digital Affairs of Indonesia
+                            </span>
+                        </p>
+                    </div>
+                </div>
             </footer>
         </div>
     </div>
@@ -329,8 +382,12 @@
         function updateLanguage() {
             const idContent = document.getElementById('content-id');
             const enContent = document.getElementById('content-en');
-            const footerId = document.getElementById('footer-id');
-            const footerEn = document.getElementById('footer-en');
+            const addressId = document.getElementById('address-id');
+            const addressEn = document.getElementById('address-en');
+            const phoneId = document.getElementById('phone-id');
+            const phoneEn = document.getElementById('phone-en');
+            const copyrightId = document.getElementById('copyright-id');
+            const copyrightEn = document.getElementById('copyright-en');
             const langToggle = document.getElementById('langToggle');
             const loadingText = document.getElementById('loadingText');
             const statusText = document.getElementById('statusText');
@@ -338,8 +395,12 @@
             if (currentLang === 'id') {
                 idContent.classList.add('active');
                 enContent.classList.remove('active');
-                footerId.style.display = 'inline';
-                footerEn.style.display = 'none';
+                addressId.style.display = 'inline';
+                addressEn.style.display = 'none';
+                phoneId.style.display = 'inline';
+                phoneEn.style.display = 'none';
+                copyrightId.style.display = 'inline';
+                copyrightEn.style.display = 'none';
                 langToggle.textContent = '🌐 English';
                 document.documentElement.lang = 'id';
                 if (loadingText && statusText) {
@@ -349,8 +410,12 @@
             } else {
                 idContent.classList.remove('active');
                 enContent.classList.add('active');
-                footerId.style.display = 'none';
-                footerEn.style.display = 'inline';
+                addressId.style.display = 'none';
+                addressEn.style.display = 'inline';
+                phoneId.style.display = 'none';
+                phoneEn.style.display = 'inline';
+                copyrightId.style.display = 'none';
+                copyrightEn.style.display = 'inline';
                 langToggle.textContent = '🌐 Indonesia';
                 document.documentElement.lang = 'en';
                 if (loadingText && statusText) {
